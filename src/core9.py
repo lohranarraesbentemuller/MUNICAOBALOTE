@@ -358,8 +358,6 @@ def maps(bot,update,args):
      )
 
 def ultima_localizacao_id(id,message):
-    #print(message)
-    #print("AQUI AQUI AQUI")
     mydb = mysql.connector.connect(
           host="localhost",
           user="USUARIO_DB",
@@ -516,7 +514,7 @@ modo='QRCODE'
 #from conf.settings import BASE_API_URL, TELEGRAM_TOKEN
 #TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 #BASE_API_URL = os.getenv("BASE_API_URL")
-TELEGRAM_TOKEN='1223754477:AAEmZcnHbCEBR_q52SimK_R8TTBx2YL0kLE'
+TELEGRAM_TOKEN='TELEGRAM_TOKEN'
 BASE_API_URL='https://http.cat/'
 #BASE_API_URL='http://www.cfo2019.com/MUNICAO_BALOTE/teste.php?teste='
 
@@ -676,7 +674,7 @@ def retorna_placa(path):
          'https://api.platerecognizer.com/v1/plate-reader/',
          data=dict(regions=regions),  # Optional
          files=dict(upload=fp),
-         headers={'Authorization': 'Token 6f069d2eda7fc84df8062ce5d8f6703841ae0631'})
+         headers={'Authorization': 'Token google_token'})
     placa=""
     #pprint(response.json())
    # print(response.json()['results'])    
@@ -970,11 +968,11 @@ def placa(bot, update):
     path=(str(update.message).split('file_id')[2].split("'")[2]) #se der problema troque o numero na frente de file_id para 1
     print ("lohran")
     print (path)
-    url='https://api.telegram.org/bot1223754477:AAEmZcnHbCEBR_q52SimK_R8TTBx2YL0kLE/getFile?file_id='+path
+    url='https://api.telegram.org/bot_token/getFile?file_id='+path
    # print(url)
     r=requests.get(url,allow_redirects=True)
    # print(r.content)
-    url='https://api.telegram.org/file/bot1223754477:AAEmZcnHbCEBR_q52SimK_R8TTBx2YL0kLE/'
+    url='https://api.telegram.org/file/bot_token/'
     path=str(r.content).split('file_path')[1].split('"')[2]
     r = requests.get(url+path,allow_redirects=True)
     open('/home/wwcfo2/www/MUNICAO_BALOTE/src/temp.jpg','wb').write(r.content) 
@@ -1604,7 +1602,7 @@ def help(bot,update):
    #  remote_photo_url="http://www.cfo2019.com/MUNICAO_BALOTE/src/audio.jpg"
    #  bot.sendPhoto(chat_id=update.message.chat_id, photo=remote_photo_url,caption="teste")     
 
-def lixo2(bot,update):
+def principal_texto(bot,update):
     print(update.message)
     print(update.message.chat_id)    
     grupo=False
@@ -1926,7 +1924,7 @@ def location(bot, update):
     
 
  
-def lixo(bot,update):
+def principal_backup(bot,update):
     print(update.message)
     print(update.message.text)
     autorizados=['674285145','687722997','140356417','1032658936','1244180790']
@@ -2299,7 +2297,7 @@ def main():
         MessageHandler(Filters.command, unknown)
     )
     dispatcher.add_handler(
-        MessageHandler(Filters.text, lixo2)
+        MessageHandler(Filters.text, principal_texto)
     )
     #if modo =='OCRPLACAS' :
     dispatcher.add_handler( 
